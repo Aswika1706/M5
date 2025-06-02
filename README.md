@@ -59,13 +59,20 @@ Write a C program to calculate the Product of first 12 natural numbers using Rec
 ## PROGRAM:
 ```
 #include <stdio.h>
+
+long long product(int n) {
+    static long long result = 1;
+    if (n > 0) {
+        result *= n;
+        product(n - 1);
+    }
+    return result;
+}
+
 int main() {
-    double number = 23.65;
-    double *ptr = &number;
-    *ptr = 25.0;
-    printf("Modified value: %.2f\n", *ptr);
+    int n = 12;
+    printf("Product of first %d natural numbers is: %lld\n", n, product(n));
     return 0;
-    
 }
 
 ```
@@ -95,21 +102,32 @@ Write C Program to find Sum of each row of a Matrix
 ## PROGRAM:
 ```
 #include <stdio.h>
+
 int main() {
-    int matrix[3][3] = {
-    {1, 2, 3},
-    {4, 5, 6},
-    {7, 8, 9}
-    };
-    int rows = 3, cols = 3;
-    for (int i = 0; i < rows; i++) {
+    int rows, cols, i, j;
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+
+    int matrix[rows][cols];
+    printf("Enter the elements of the matrix:\n");
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+    for (i = 0; i < rows; i++) {
         int sum = 0;
-        for (int j = 0; j < cols; j++) {
+        for (j = 0; j < cols; j++) {
             sum += matrix[i][j];
         }
-        printf("Sum of row %d: %d\n", i + 1, sum);
+        printf("Sum of row %d is: %d\n", i + 1, sum);
     }
+
     return 0;
+}
+
 }
 
 ```
@@ -144,22 +162,24 @@ Write C program for the below pyramid string pattern. Enter a string: PROGRAM En
 ```
 #include <stdio.h>
 #include <string.h>
+
 int main() {
-    char str[] = "PROGRAM";
-    int num_rows, len = strlen(str);
-    scanf("%d", &num_rows);
-    printf("Enter number of rows: %d\n",num_rows);
-    int midpoint = (2 * num_rows - 1) / 2;
-    for (int i = 1; i <= num_rows; i++) {
-        int j;
-        for (j = 0; j < num_rows - i; j++) {
-            printf(" ");
-        }
-        for (j = 0; j < (2 * i - 1); j++) {
-            printf("%c", str[j % len]);
+    char str[100];
+    int rows, i, j, len;
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    printf("Enter number of rows: ");
+    scanf("%d", &rows);
+
+    len = strlen(str);
+    for (i = 1; i <= rows; i++) {
+        for (j = 0; j < i; j++) {
+            printf("%c ", str[j % len]); 
         }
         printf("\n");
     }
+
     return 0;
 }
 
@@ -203,27 +223,32 @@ Step 6: End the program.
 ## PROGRAM
 ```
 #include <stdio.h>
+
 int main() {
-    int i, n;
-    int arr[10];
-    int *parr = arr;
-    scanf("%d", &n);
-    printf("Enter the number of elements: %d\n",n);
-    for (i = 0; i < n; i++) {
-        scanf("%d", parr + i);
+    int arr[6];
+    int *ptr = arr;
+
+    printf("Enter 6 integers:\n");
+    for (int i = 0; i < 6; i++) {
+        scanf("%d", (ptr + i));
     }
-    printf("The elements in the array are:\n");
-    for (i = 0; i < n; i++) {
-        printf("%d ", *(parr + i));
+
+    printf("The entered elements are:\n");
+    for (int i = 0; i < 6; i++) {
+        printf("%d ", *(ptr + i));
     }
+
     printf("\n");
+
     return 0;
+}
 }
 
 ```
 
 ## OUTPUT
-![M-25](https://github.com/user-attachments/assets/f1bad8bf-4483-42dc-8416-7ff786336366)
+
+![m-6](https://github.com/user-attachments/assets/daac782a-1901-4423-982b-1dc56fade386)
 
  
 
